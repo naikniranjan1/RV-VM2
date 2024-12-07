@@ -58,7 +58,7 @@ const HomeScreen = () => {
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Quick Check-In</Text>
-              <Text style={styles.cardDescription}>Fast track entry</Text>
+              <Text style={styles.cardDescription}>Fast track visitor entry</Text>
             </View>
           </TouchableOpacity>
 
@@ -67,11 +67,11 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('CabEntry')}
           >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="car" size={24} color={Colors.PRIMARY} />
+              <Ionicons name="car-outline" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Cab Entry</Text>
-              <Text style={styles.cardDescription}>Register cab</Text>
+              <Text style={styles.cardDescription}>Register campus cabs</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -83,7 +83,7 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('ApprovalStatus')}
           >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="checkmark-circle" size={24} color={Colors.PRIMARY} />
+              <Ionicons name="time-outline" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Approval Status</Text>
@@ -99,27 +99,27 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('TodaysVisitors')}
           >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="people" size={24} color={Colors.PRIMARY} />
+              <Ionicons name="people-outline" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Today's Visitors</Text>
-              <Text style={styles.cardDescription}>Total: 15</Text>
+              <Text style={styles.cardDescription}>View active visitors</Text>
             </View>
           </TouchableOpacity>
         </View>
 
-        {/* Additional Buttons */}
+        {/* Third Row - Gallery and Register */}
         <View style={styles.buttonRow}>
           <TouchableOpacity 
             style={[styles.card, styles.cardHalf]}
             onPress={() => navigation.navigate('Gallery')}
           >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="images" size={24} color={Colors.PRIMARY} />
+              <Ionicons name="images-outline" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Gallery</Text>
-              <Text style={styles.cardDescription}>View campus photos</Text>
+              <Text style={styles.cardDescription}>Campus tour photos</Text>
             </View>
           </TouchableOpacity>
 
@@ -128,11 +128,11 @@ const HomeScreen = () => {
             onPress={() => navigation.navigate('VisitorRegistration')}
           >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="person-add" size={24} color={Colors.PRIMARY} />
+              <Ionicons name="person-add-outline" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Register</Text>
-              <Text style={styles.cardDescription}>New visitor</Text>
+              <Text style={styles.cardDescription}>New visitor entry</Text>
             </View>
           </TouchableOpacity>
         </View>
