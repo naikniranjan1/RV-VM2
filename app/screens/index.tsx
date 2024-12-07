@@ -4,9 +4,13 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { Ionicons } from '@expo/vector-icons';
 import Carousel from 'react-native-reanimated-carousel';
 import { Colors } from '@/constants/Colors';
+import { useNavigation } from '@react-navigation/native';
+import { StackNavigationProp } from '@react-navigation/stack';
+import { RootStackParamList } from '../types/navigation';
 
 const HomeScreen = () => {
   const width = Dimensions.get('window').width;
+  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
   
   const images = [
     require('@/assets/images/rvce-gate.jpg'),
@@ -45,7 +49,10 @@ const HomeScreen = () => {
 
         {/* First Row - Quick Check-In and Cab Entry */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={[styles.card, styles.cardHalf]}>
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('QuickCheckIn')}
+          >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
               <Ionicons name="flash" size={24} color={Colors.PRIMARY} />
             </View>
@@ -55,7 +62,10 @@ const HomeScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.card, styles.cardHalf]}>
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('CabEntry')}
+          >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
               <Ionicons name="car" size={24} color={Colors.PRIMARY} />
             </View>
@@ -68,7 +78,10 @@ const HomeScreen = () => {
 
         {/* Second Row - Approval Status and Today's Visitors */}
         <View style={styles.buttonRow}>
-          <TouchableOpacity style={[styles.card, styles.cardHalf]}>
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('ApprovalStatus')}
+          >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
               <Ionicons name="checkmark-circle" size={24} color={Colors.PRIMARY} />
             </View>
@@ -81,13 +94,45 @@ const HomeScreen = () => {
             </View>
           </TouchableOpacity>
 
-          <TouchableOpacity style={[styles.card, styles.cardHalf]}>
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('TodaysVisitors')}
+          >
             <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
               <Ionicons name="people" size={24} color={Colors.PRIMARY} />
             </View>
             <View style={styles.cardContent}>
               <Text style={styles.cardTitle}>Today's Visitors</Text>
               <Text style={styles.cardDescription}>Total: 15</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+
+        {/* Additional Buttons */}
+        <View style={styles.buttonRow}>
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('Gallery')}
+          >
+            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
+              <Ionicons name="images" size={24} color={Colors.PRIMARY} />
+            </View>
+            <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>Gallery</Text>
+              <Text style={styles.cardDescription}>View campus photos</Text>
+            </View>
+          </TouchableOpacity>
+
+          <TouchableOpacity 
+            style={[styles.card, styles.cardHalf]}
+            onPress={() => navigation.navigate('VisitorRegistration')}
+          >
+            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
+              <Ionicons name="person-add" size={24} color={Colors.PRIMARY} />
+            </View>
+            <View style={styles.cardContent}>
+              <Text style={styles.cardTitle}>Register</Text>
+              <Text style={styles.cardDescription}>New visitor</Text>
             </View>
           </TouchableOpacity>
         </View>
