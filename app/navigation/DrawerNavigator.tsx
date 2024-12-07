@@ -51,6 +51,7 @@ export default function DrawerNavigator() {
         name="Profile"
         component={Profile}
         options={{
+          headerShown: false,
           drawerIcon: ({ color }) => (
             <View style={[styles.iconContainer, { backgroundColor: color === '#fff' ? Colors.PRIMARY : '#F3F0FF' }]}>
               <Ionicons name="person-outline" size={22} color={color === '#fff' ? '#fff' : Colors.PRIMARY} />
@@ -59,12 +60,13 @@ export default function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="Settings"
-        component={Settings}
+        name="EmergencyContact"
+        component={EmergencyContact}
         options={{
+          drawerLabel: 'Emergency Contact',
           drawerIcon: ({ color }) => (
             <View style={[styles.iconContainer, { backgroundColor: color === '#fff' ? Colors.PRIMARY : '#F3F0FF' }]}>
-              <Ionicons name="settings-outline" size={22} color={color === '#fff' ? '#fff' : Colors.PRIMARY} />
+              <Ionicons name="call-outline" size={22} color={color === '#fff' ? '#fff' : Colors.PRIMARY} />
             </View>
           ),
         }}
@@ -82,13 +84,12 @@ export default function DrawerNavigator() {
         }}
       />
       <Drawer.Screen
-        name="EmergencyContact"
-        component={EmergencyContact}
+        name="Settings"
+        component={Settings}
         options={{
-          drawerLabel: 'Emergency Contact',
           drawerIcon: ({ color }) => (
             <View style={[styles.iconContainer, { backgroundColor: color === '#fff' ? Colors.PRIMARY : '#F3F0FF' }]}>
-              <Ionicons name="call-outline" size={22} color={color === '#fff' ? '#fff' : Colors.PRIMARY} />
+              <Ionicons name="settings-outline" size={22} color={color === '#fff' ? '#fff' : Colors.PRIMARY} />
             </View>
           ),
         }}

@@ -1,50 +1,34 @@
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import { Home } from '../screens/Home';
-import { VisitorRegistration } from '../screens/VisitorRegistration';
-import { VisitorLog } from '../screens/VisitorLog';
-import { More } from '../screens/More';
+import { Ionicons } from '@expo/vector-icons';
+import Home from '../screens/Home';
+import Profile from '../screens/Profile';
+import Plus from '../screens/plus';
+import Settings from '../screens/Settings';
 
 const Tab = createBottomTabNavigator();
 
 export function BottomTabNavigator() {
   return (
-    <Tab.Navigator>
-      <Tab.Screen 
-        name="Home" 
-        component={Home}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="home" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tab.Screen 
-        name="VisitorEntry" 
-        component={VisitorRegistration}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="person-add" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tab.Screen 
-        name="VisitorLog" 
-        component={VisitorLog}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="list" color={color} size={24} />
-          ),
-        }}
-      />
-      <Tab.Screen 
-        name="More" 
-        component={More}
-        options={{
-          tabBarIcon: ({ color }) => (
-            <Icon name="more-horiz" color={color} size={24} />
-          ),
-        }}
-      />
+    <Tab.Navigator
+      screenOptions={({ route }) => ({
+        tabBarIcon: ({ color, size }) => {
+          let iconName: keyof typeof Ionicons.glyphMap = 'home';
+
+          if (route.name === 'Home') iconName = 'home';
+          else if (route.name === 'Profile') iconName = 'person';
+          else if (route.name === 'Plus') iconName = 'add-circle';
+          else if (route.name === 'Settings') iconName = 'settings';
+
+          return <Ionicons name={iconName} size={size} color={color} />;
+        },
+        tabBarActiveTintColor: '#6366f1',
+        tabBarInactiveTintColor: 'gray',
+      })}
+    >
+      <Tab.Screen name="Home" component={Home} />
+      <Tab.Screen name="Profile" component={Profile} />
+      <Tab.Screen name="Plus" component={Plus} />
+      <Tab.Screen name="Settings" component={Settings} />
     </Tab.Navigator>
   );
 } 
