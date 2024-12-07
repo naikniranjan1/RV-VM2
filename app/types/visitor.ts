@@ -14,6 +14,7 @@ export interface AdditionalDetailsFormData {
   documentUri: string;
   visitorPhotoUri: string;
   sendNotification: boolean;
+  visitorCount: number;
 }
 
 export interface DropdownOption {

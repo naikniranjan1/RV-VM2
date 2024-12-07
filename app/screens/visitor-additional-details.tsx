@@ -8,6 +8,7 @@ import { Header } from '../components/ui/header';
 import { PhotoUploadSection } from '../components/visitor/photo-upload-section';
 import { VisitorForm } from '../components/visitor/visitor-form';
 import { SubmitButton } from '../components/ui/submit-button';
+import { Counter } from '../components/ui/counter';
 
 type ScreenRouteProp = RouteProp<RootStackParamList, 'VisitorAdditionalDetails'>;
 type ScreenNavigationProp = StackNavigationProp<RootStackParamList, 'VisitorAdditionalDetails'>;
@@ -24,6 +25,7 @@ export function VisitorAdditionalDetails() {
     documentUri: '',
     visitorPhotoUri: '',
     sendNotification: true,
+    visitorCount: 1,
   });
 
   const handleSubmit = () => {
@@ -44,35 +46,53 @@ export function VisitorAdditionalDetails() {
         onBack={() => navigation.goBack()} 
       />
 
-      <VisitorForm
-        formData={formData}
-        setFormData={setFormData}
-        renderBefore={() => (
-          <PhotoUploadSection 
-            type="visitor" 
-            uri={formData.visitorPhotoUri}
-            onPhotoSelected={(uri: string) => setFormData(prev => ({ 
-              ...prev, 
-              visitorPhotoUri: uri 
-            }))}
-          />
-        )}
-        renderAfter={() => formData.documentType && (
-          <PhotoUploadSection 
-            type="document" 
-            uri={formData.documentUri}
-            onPhotoSelected={(uri) => setFormData(prev => ({ 
-              ...prev, 
-              documentUri: uri 
-            }))}
-          />
-        )}
-      />
+      <View style={styles.content}>
+        <PhotoUploadSection 
+          type="visitor" 
+          uri={formData.visitorPhotoUri}
+          onPhotoSelected={(uri: string) => setFormData(prev => ({ 
+            ...prev, 
+            visitorPhotoUri: uri 
+          }))}
+        />
 
-      <SubmitButton 
-        onPress={handleSubmit}
-        label="Submit"
-      />
+        <Counter
+          label="Number of Visitors"
+          count={formData.visitorCount}
+          onIncrement={() => setFormData(prev => ({
+            ...prev,
+            visitorCount: prev.visitorCount + 1
+          }))}
+          onDecrement={() => setFormData(prev => ({
+            ...prev,
+            visitorCount: prev.visitorCount - 1
+          }))}
+          minValue={1}
+          maxValue={10}
+        />
+
+        <VisitorForm
+          formData={formData}
+          setFormData={setFormData}
+          renderAfter={() => formData.documentType && (
+            <PhotoUploadSection 
+              type="document" 
+              uri={formData.documentUri}
+              onPhotoSelected={(uri) => setFormData(prev => ({ 
+                ...prev, 
+                documentUri: uri 
+              }))}
+            />
+          )}
+        />
+      </View>
+
+      <View style={styles.footer}>
+        <SubmitButton 
+          onPress={handleSubmit}
+          label="Submit"
+        />
+      </View>
     </SafeAreaView>
   );
 }
@@ -81,5 +101,13 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
+  },
+  content: {
+    flex: 1,
+    padding: 16,
+  },
+  footer: {
+    padding: 16,
+    paddingBottom: 24,
   },
 }); 
