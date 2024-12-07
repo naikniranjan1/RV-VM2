@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 # Welcome  👋
 
 
@@ -30,9 +29,6 @@ npm run reset-project
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
 
-
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
 =======
 # RV-Visitor-Management
 >>>>>>> be3d5954d10c820d228fa221454547f77d522146
