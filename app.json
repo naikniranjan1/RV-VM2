@@ -7,39 +7,32 @@
     "icon": "./assets/images/icon.png",
     "scheme": "myapp",
     "userInterfaceStyle": "automatic",
-    "newArchEnabled": true,
+    "splash": {
+      "image": "./assets/images/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "#ffffff"
+    },
+    "assetBundlePatterns": [
+      "**/*"
+    ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.yogishhg.rvcevms"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
-    },
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/images/favicon.png"
+      },
+      "package": "com.yogishhg.rvcevms",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "plugins": [
       "expo-router",
-      [
-        "expo-splash-screen",
-        {
-          "image": "./assets/images/splash-icon.png",
-          "imageWidth": 200,
-          "resizeMode": "contain",
-          "backgroundColor": "#ffffff"
-        }
-      ],
-      [
-        "expo-image-picker",
-        {
-          "photosPermission": "The app accesses your photos to let you upload documents.",
-          "cameraPermission": "The app accesses your camera to let you take photos of documents."
-        }
-      ]
+      "expo-image-picker",
+      "expo-document-picker"
     ],
     "experiments": {
       "typedRoutes": true
@@ -49,9 +42,8 @@
         "origin": false
       },
       "eas": {
-        "projectId": "ff9ca09f-80f6-4923-b9d0-0129aaff394b"
+        "projectId": "cd3d183d-1e86-455e-a6e9-3ed3f7f325af"
       }
-    },
-    "owner": "yogishhg"
+    }
   }
 }
