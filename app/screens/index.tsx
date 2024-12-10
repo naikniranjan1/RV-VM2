@@ -1,232 +1,87 @@
 import React from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, Dimensions, Image } from 'react-native';
-import { SafeAreaView } from 'react-native-safe-area-context';
-import { Ionicons } from '@expo/vector-icons';
-import Carousel from 'react-native-reanimated-carousel';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import HomeScreen from './Home';
+import QuickCheckInScreen from './quick-check-in';
+import CabEntry from './cab-entry';
+import ApprovalStatus from './ApprovaStatus';
+import TodaysVisitors from './TodaysVisitors';
 import { Colors } from '@/constants/Colors';
-import { useNavigation } from '@react-navigation/native';
-import { StackNavigationProp } from '@react-navigation/stack';
-import { RootStackParamList } from '../types/navigation';
+import { TouchableOpacity } from 'react-native';
+import Ionicons from 'react-native-vector-icons/Ionicons';
+import VisitorEntry from './VisitorEntry';
+import Document from './document';
 
-const HomeScreen = () => {
-  const width = Dimensions.get('window').width;
-  const navigation = useNavigation<StackNavigationProp<RootStackParamList>>();
-  
-  const images = [
-    require('@/assets/images/rvce-gate.jpg'),
-    require('@/assets/images/rvce-campus.jpg'),
-    require('@/assets/images/rvce-building.jpg'),
-  ];
+const Stack = createNativeStackNavigator<RootStackParamList>();
 
+const AppNavigator = () => {
   return (
-    <SafeAreaView style={styles.container}>
-      <View style={styles.content}>
-        {/* Image Slider */}
-        <View style={styles.sliderContainer}>
-          <Carousel
-            loop
-            width={width}
-            height={width * 0.4}
-            autoPlay={true}
-            data={images}
-            scrollAnimationDuration={1000}
-            mode="parallax"
-            modeConfig={{
-              parallaxScrollingScale: 0.9,
-              parallaxScrollingOffset: 50,
-            }}
-            renderItem={({ item }) => (
-              <View style={styles.slideItem}>
-                <Image
-                  source={item}
-                  style={styles.slideImage}
-                  resizeMode="cover"
-                />
-              </View>
-            )}
-          />
-        </View>
-
-        {/* First Row - Quick Check-In and Cab Entry */}
-        <View style={styles.buttonRow}>
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('QuickCheckIn')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="flash" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Quick Check-In</Text>
-              <Text style={styles.cardDescription}>Fast track visitor entry</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('CabEntry')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="car-outline" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Cab Entry</Text>
-              <Text style={styles.cardDescription}>Register campus cabs</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* Second Row - Approval Status and Today's Visitors */}
-        <View style={styles.buttonRow}>
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('ApprovalStatus')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="time-outline" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Approval Status</Text>
-              <Text style={styles.cardDescription}>View pending requests</Text>
-            </View>
-            <View style={[styles.badge, { backgroundColor: Colors.PRIMARY }]}>
-              <Text style={styles.badgeText}>5</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('TodaysVisitors')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="people-outline" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Today's Visitors</Text>
-              <Text style={styles.cardDescription}>View active visitors</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-
-        {/* Third Row - Gallery and Register */}
-        <View style={styles.buttonRow}>
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('Gallery')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="images-outline" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Gallery</Text>
-              <Text style={styles.cardDescription}>Campus tour photos</Text>
-            </View>
-          </TouchableOpacity>
-
-          <TouchableOpacity 
-            style={[styles.card, styles.cardHalf]}
-            onPress={() => navigation.navigate('VisitorRegistration')}
-          >
-            <View style={[styles.iconContainer, { backgroundColor: '#F3F0FF' }]}>
-              <Ionicons name="person-add-outline" size={24} color={Colors.PRIMARY} />
-            </View>
-            <View style={styles.cardContent}>
-              <Text style={styles.cardTitle}>Register</Text>
-              <Text style={styles.cardDescription}>New visitor entry</Text>
-            </View>
-          </TouchableOpacity>
-        </View>
-      </View>
-    </SafeAreaView>
+    <Stack.Navigator 
+      initialRouteName="Home"
+      screenOptions={{
+        headerStyle: {
+          backgroundColor: '#FFFFFF',
+        },
+        headerShadowVisible: false,
+        headerTintColor: Colors.PRIMARY,
+      }}
+    >
+      <Stack.Screen 
+        name="Home" 
+        component={HomeScreen} 
+        options={{ headerShown: false }}
+      />
+      <Stack.Screen 
+        name="QuickCheckIn" 
+        component={QuickCheckInScreen} 
+        options={({ navigation }) => ({ 
+          title: 'Quick Check-In',
+          headerLeft: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()}
+              style={{ marginLeft: 10 }}
+            >
+              <Ionicons name="arrow-back" size={24} color={Colors.PRIMARY} />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Stack.Screen 
+        name="CabEntry" 
+        component={CabEntry} 
+        options={({ navigation }) => ({ 
+          title: 'Cab Entry',
+          headerLeft: () => (
+            <TouchableOpacity 
+              onPress={() => navigation.goBack()}
+              style={{ marginLeft: 10 }}
+            >
+              <Ionicons name="arrow-back" size={24} color={Colors.PRIMARY} />
+            </TouchableOpacity>
+          ),
+        })}
+      />
+      <Stack.Screen 
+        name="ApprovalStatus" 
+        component={ApprovalStatus} 
+        options={{ title: 'Approval Status' }}
+      />
+      <Stack.Screen 
+        name="TodaysVisitors" 
+        component={TodaysVisitors} 
+        options={{ title: 'TodaysVisitors' }}
+      />
+      <Stack.Screen 
+        name="VisitorEntry" 
+        component={VisitorEntry} 
+        options={{ title: 'VisitorEntry' }}
+      />
+      <Stack.Screen 
+        name="Document" 
+        component={Document} 
+        options={{ title: 'Documents' }}
+      />
+    </Stack.Navigator>
   );
 };
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#F5F5F5',
-  },
-  content: {
-    flex: 1,
-  },
-  sliderContainer: {
-    height: Dimensions.get('window').width * 0.4,
-    marginVertical: 20,
-  },
-  slideItem: {
-    width: '100%',
-    height: '100%',
-    borderRadius: 8,
-    overflow: 'hidden',
-  },
-  slideImage: {
-    width: '100%',
-    height: '100%',
-  },
-  buttonRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
-    paddingHorizontal: 16,
-    marginBottom: 16,
-  },
-  card: {
-    backgroundColor: '#FFFFFF',
-    borderRadius: 12,
-    padding: 16,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.1,
-    shadowRadius: 3,
-    elevation: 3,
-    position: 'relative', // For badge positioning
-  },
-  cardHalf: {
-    width: '48%', // Slightly less than 50% to account for spacing
-  },
-  iconContainer: {
-    width: 48,
-    height: 48,
-    borderRadius: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginBottom: 12,
-  },
-  cardContent: {
-    alignItems: 'center',
-  },
-  cardTitle: {
-    fontSize: 16,
-    fontWeight: '600',
-    color: '#333',
-    marginBottom: 4,
-    textAlign: 'center',
-  },
-  cardDescription: {
-    fontSize: 12,
-    color: '#666',
-    textAlign: 'center',
-  },
-  badge: {
-    position: 'absolute',
-    top: -6,
-    right: -6,
-    backgroundColor: '#D10000',
-    borderRadius: 12,
-    minWidth: 24,
-    height: 24,
-    justifyContent: 'center',
-    alignItems: 'center',
-    paddingHorizontal: 8,
-  },
-  badgeText: {
-    color: '#FFFFFF',
-    fontSize: 12,
-    fontWeight: 'bold',
-  },
-});
-
-export default HomeScreen;
+export default AppNavigator;

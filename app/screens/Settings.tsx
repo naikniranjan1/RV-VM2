@@ -61,26 +61,13 @@ export default function Settings() {
             isDarkMode, 
             setIsDarkMode
           )}
-          {renderSettingItem(
-            'Notifications', 
-            'notifications-outline', 
-            true, 
-            isNotificationsEnabled, 
-            setIsNotificationsEnabled
-          )}
-          {renderSettingItem(
-            'Location Services', 
-            'location-outline', 
-            true, 
-            isLocationEnabled, 
-            setIsLocationEnabled
-          )}
+          
+          
         </View>
 
         {/* Account Section */}
         <View style={styles.section}>
           <Text style={styles.sectionTitle}>Account</Text>
-          {renderSettingItem('Language', 'language-outline')}
           {renderSettingItem('Change Password', 'lock-closed-outline')}
           {renderSettingItem('Privacy', 'shield-outline')}
         </View>
